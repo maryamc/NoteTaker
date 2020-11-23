@@ -1,9 +1,10 @@
 // Requiring dependencies
 // using path package for file path in html
-var path = require("path");
+const path = require("path");
+
 
 // Routes
-module.exports= function(app){
+module.export= function(app){
     // routing for index.html
     app.get("/", function(req,res){
         res.sendFile(path.join(__dirname, "../public/index.html"));
