@@ -33,7 +33,25 @@ class dbdata {
     });
   }
 
+  add(note) {
+    const { title, text } = note;
+
+    if (!title || !text) {
+      throw new Error("Woops! 'title' and 'text' are empty");
+    }
+
+    // using uuidv4 to add an id to the notes to populate db
+    const newNote = { title, text, id: uuidv4() };
+
+    // returns all note data
+    return this.getNotes()
+      .then((notes) => [...notes, newNote])
+      .then((updatedNotes) => this.write(updatedNotes))
+      .then(() => newNote);
+  }
+
   
 }
 
+//creates db data on requests in db.json
 module.exports = new dbdata();
