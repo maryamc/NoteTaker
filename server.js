@@ -1,5 +1,7 @@
 // Requiring the dependencies
 const express = require("express");
+const apiRoutes = require("./routes/apiRoutes");
+const htmlRoutes = require("./routes/htmlRoutes");
 
 //Tells node that we are creating an "express" server
 const app = express();
@@ -13,10 +15,12 @@ const PORT = process.env.PORT || 7500;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(express.static("public"));
+
 //Routes
 //points server to series of route files providing our server with a map of how to respond to client activity
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+app.use("/api", apiRoutes);
+app.use("/",htmlRoutes);
 
 
 //Listener
