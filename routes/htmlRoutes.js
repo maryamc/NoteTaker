@@ -1,19 +1,19 @@
 // Requiring dependencies
 // using path package for file path in html
 const path = require("path");
+const router = require ("express").Router();
 
 
 // Routes
-module.export= function(app){
-    // routing for index.html
-    app.get("/", function(req,res){
-        res.sendFile(path.join(__dirname, "../public/index.html"));
 
-    });
+//Routing for index.html
+router.get("*", (req,res ) => {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
-    // routing for notes.html
-    app.get("/notes", function(req,res){
-        res.sendFile(path.join(__dirname, "../public/notes.html"))
-    });
+//Routing for notes.html
+router.get("/notes", (req,res) => {
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
+});
 
-};
+module.exports = router;
